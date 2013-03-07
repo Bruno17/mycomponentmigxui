@@ -1,0 +1,101 @@
+{
+  "id":62,
+  "name":"mcuicategories",
+  "formtabs":[
+    {
+      "MIGX_id":1,
+      "caption":"Category",
+      "fields":[
+        {
+          "MIGX_id":1,
+          "field":"category",
+          "caption":"Category",
+          "inputTV":"",
+          "inputTVtype":"",
+          "configs":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"@EVAL return $modx->runSnippet('migxLoopCollection',array('sortConfig'=>'[{\"sortby\":\"category\"}]','classname'=>'modCategory','tpl'=>'@CODE:[[+category]]','outputSeparator'=>'||'));",
+          "default":""
+        },
+        {
+          "MIGX_id":2,
+          "field":"parent",
+          "caption":"Parent",
+          "inputTV":"",
+          "inputTVtype":"",
+          "configs":"",
+          "sourceFrom":"config",
+          "sources":"",
+          "inputOptionValues":"@EVAL return '-==0||' . $modx->runSnippet('migxLoopCollection',array('sortConfig'=>'[{\"sortby\":\"category\"}]','classname'=>'modCategory','tpl'=>'@CODE:[[+category]]','outputSeparator'=>'||'));",
+          "default":""
+        }
+      ]
+    }
+  ],
+  "contextmenus":"",
+  "actionbuttons":"",
+  "columnbuttons":"",
+  "filters":"",
+  "extended":{
+    "migx_add":"Add Category",
+    "formcaption":"Category",
+    "win_id":"mcuicategories",
+    "multiple_formtabs":"",
+    "extrahandlers":"",
+    "packageName":"mycomponentmigxui",
+    "classname":"",
+    "task":"",
+    "getlistsort":"",
+    "getlistsortdir":"",
+    "use_custom_prefix":"0",
+    "prefix":"",
+    "grid":"",
+    "gridload_mode":1,
+    "check_resid":1,
+    "check_resid_TV":"",
+    "join_alias":"",
+    "getlistwhere":"",
+    "joins":"",
+    "cmpmaincaption":"",
+    "cmptabcaption":"",
+    "cmptabdescription":"",
+    "cmptabcontroller":""
+  },
+  "columns":[
+    {
+      "MIGX_id":1,
+      "header":"Category",
+      "dataIndex":"category",
+      "width":"",
+      "sortable":"false",
+      "show_in_grid":1,
+      "renderer":"",
+      "clickaction":"",
+      "selectorconfig":"",
+      "renderoptions":""
+    },
+    {
+      "MIGX_id":2,
+      "header":"Parent",
+      "dataIndex":"parent",
+      "width":"",
+      "sortable":"false",
+      "show_in_grid":1,
+      "renderer":"",
+      "clickaction":"",
+      "selectorconfig":"",
+      "renderoptions":""
+    }
+  ],
+  "createdby":1,
+  "createdon":"2013-03-06 20:44:43",
+  "editedby":1,
+  "editedon":"2013-03-07 08:18:24",
+  "deleted":0,
+  "deletedon":"-1-11-30 00:00:00",
+  "deletedby":0,
+  "published":1,
+  "publishedon":"2013-03-06 01:00:00",
+  "publishedby":0
+}

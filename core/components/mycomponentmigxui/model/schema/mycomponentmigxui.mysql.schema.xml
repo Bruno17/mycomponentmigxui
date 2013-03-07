@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model package="mycomponentmigxui" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" version="1.1">
+	<object class="mcuiConfig" table="mcui_configs" extends="xPDOSimpleObject">
+
+	<field key="packageName" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+    <field key="packageNameLower" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+    <field key="packageDescription" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+    <field key="version" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+    <field key="release" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+    <field key="gitHubUsername" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+    <field key="gitHubRepository" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+    <field key="primaryLanguage" dbtype="varchar" precision="2" phptype="string" null="false" default="" />
+    <field key="allStatic" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+    <field key="hasAssets" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+    <field key="minifyJS" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+    <field key="readme_md" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+    <field key="hasCore" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+    <field key="dryRun" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+    <field key="getResourcesById" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+    <field key="rewriteCodeFiles" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+    <field key="rewriteLexiconFiles" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+    <field key="install_options" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+
+    <field key="newSystemSettings" dbtype="text" phptype="string" null="false" default="" />
+    <field key="newSystemEvents" dbtype="text" phptype="string" null="false" default="" />
+    <field key="namespaces" dbtype="text" phptype="string" null="false" default="" />
+    <field key="contexts" dbtype="text" phptype="string" null="false" default="" />
+    <field key="contextSettings" dbtype="text" phptype="string" null="false" default="" />
+    <field key="categories" dbtype="text" phptype="string" null="false" default="" />
+    <field key="menus" dbtype="text" phptype="string" null="false" default="" />
+    <field key="elements" dbtype="text" phptype="string" null="false" default="" />
+    <field key="resources" dbtype="text" phptype="string" null="false" default="" />
+    <field key="languages" dbtype="text" phptype="string" null="false" default="" />
+    <field key="assetsDirs" dbtype="text" phptype="string" null="false" default="" />
+    <field key="docs" dbtype="text" phptype="string" null="false" default="" />
+    <field key="resolvers" dbtype="text" phptype="string" null="false" default="" />
+    <field key="validators" dbtype="text" phptype="string" null="false" default="" />
+    <field key="classes" dbtype="text" phptype="string" null="false" default="" />
+    <field key="process" dbtype="text" phptype="string" null="false" default="" />
+    <field key="exportResources" dbtype="text" phptype="string" null="false" default="" />
+    <field key="parents" dbtype="text" phptype="string" null="false" default="" />
+    <field key="includeParents" dbtype="text" phptype="string" null="false" default="" />
+    <field key="scriptPropertiesAliases" dbtype="text" phptype="string" null="false" default="" />
+    
+    <field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+	<field key="createdon" dbtype="datetime" phptype="datetime" null="false" />
+	<field key="editedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
+	<field key="editedon" dbtype="datetime" phptype="datetime" null="false" />
+
+	</object>
+
+      
+    
+</model>
