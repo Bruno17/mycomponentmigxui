@@ -10,17 +10,38 @@ class mcuiConfig extends xPDOSimpleObject {
         return $paths;
     }
 
-    public function loadExampleArray() {
+    public function loadConfigArray() {
         $paths = $this->initPaths();
 
-        $mypath = $paths['tplPath'] . 'myexample.config.php';
-        $defaultpath = $paths['tplPath'] . 'example.config.php';
-        if (file_exists($mypath)) {
-            $config = include $mypath;
-        } elseif (file_exists($defaultpath)) {
-            $config = include $defaultPath;
+        $path = $paths['mycomponentCore'] . '_build/config/' . strtolower($this->get('packageName') . '.config.php');
+        if (file_exists($path)) {
+            $config = include $path;
         }
-        $this->fromArray($config);
+        if (is_array($config)) {
+            $this->fromArray($config);
+        }
+    }
+
+    public function prepareConfigArray($components) {
+        $objectArray = $this->toArray();
+        
+        $objectArray['packageNameLower'] = strtolower($objectArray['packageName']);
+        
+        $cats = $this->xpdo->fromJson($objectArray['categories']);
+        if (is_array($cats)) {
+            $categories = array();
+            foreach ($cats as $category) {
+                unset($category['MIGX_id']);
+                $categories[$category['category']] = $category;
+            }
+            $objectArray['categories'] = $categories;
+        }
+        
+        $objectArray['process'] = explode('||',$objectArray['process']);
+
+        unset($objectArray['id'], $objectArray['createdon'], $objectArray['createdby']);
+
+        return array_merge($components, $objectArray);
 
     }
 
@@ -35,9 +56,9 @@ class mcuiConfig extends xPDOSimpleObject {
         return $newTpl;
     }
 
-    public function save($cacheFlag= null) {
+    public function save($cacheFlag = null) {
         $result = parent::save($cacheFlag);
-        if ($result){
+        if ($result) {
             $this->createConfigFile();
         }
         return $result;
@@ -46,9 +67,9 @@ class mcuiConfig extends xPDOSimpleObject {
     public function createConfigFile() {
         $newProjectName = $this->get('packageName');
         $newProjectLower = strtolower($newProjectName);
-        
+
         $paths = $this->initPaths();
-        
+
         $props = array();
         $props['mycomponentCore'] = $paths['mycomponentCore'];
         require_once $props['mycomponentCore'] . 'model/mycomponent/helpers.class.php';
@@ -69,24 +90,28 @@ class mcuiConfig extends xPDOSimpleObject {
             break;
         }
         $configFile = $configDir . $newProjectLower . '.config.php';
-        $fp = fopen($configFile, 'w');
-        if ($fp) {
-            fwrite($fp, $newTpl);
-            fclose($fp);
-        } else {
-            $message = 'Could not open new config file';
-            break;
+
+        if (!file_exists($configFile)) {
+            $fp = fopen($configFile, 'w');
+            if ($fp) {
+                fwrite($fp, $newTpl);
+                fclose($fp);
+            } else {
+                $message = 'Could not open new config file';
+                break;
+            }
+            $message = "Important! Edit the new config file before running any utilities:\n" . $configFile;
+            $projects[$newProjectLower] = $configFile;
+            /* update projects file */
+            $content = '<' . '?' . "php\n\n  \$projects = " . var_export($projects, true) . ';' . "\n return \$projects;";
+            $fp = fopen($projectFile, 'w');
+            if ($fp) {
+                fwrite($fp, $content);
+                fclose($fp);
+            }
+
         }
-        
-        $message = "Important! Edit the new config file before running any utilities:\n" . $configFile;
-        $projects[$newProjectLower] = $configFile;
-        /* update projects file */
-        $content = '<' . '?' . "php\n\n  \$projects = " . var_export($projects, true) . ';' . "\n return \$projects;";
-        $fp = fopen($projectFile, 'w');
-        if ($fp) {
-            fwrite($fp, $content);
-            fclose($fp);
-        }
+
     }
 
 

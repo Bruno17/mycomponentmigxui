@@ -35,7 +35,7 @@ if ($this->modx->lexicon) {
 if (empty($scriptProperties['object_id']) || $scriptProperties['object_id'] == 'new') {
     $object = $modx->newObject($classname);
     $object->set('object_id', 'new');
-    $object->loadExampleArray();
+    
     
 } else {
     $c = $modx->newQuery($classname, $scriptProperties['object_id']);
@@ -53,6 +53,7 @@ if (empty($scriptProperties['object_id']) || $scriptProperties['object_id'] == '
     }
     if ($object = $modx->getObject($classname, $c)){
         $object_id = $object->get('id');
+        //$object->loadConfigArray();
     }
 }
 
