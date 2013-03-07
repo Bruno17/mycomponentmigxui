@@ -32,7 +32,7 @@ $classname = $config['classname'];
 $object_id = $modx->getOption('object_id', $_REQUEST, 0);
 
 if ($object = $modx->getObject('mcuiConfig', $object_id)) {
-    $newProjectName = $object->get('packageName');
+    $newProjectName = strtolower($object->get('packageName'));
     $content = file_get_contents($cpFile);
     $content = str_replace($currentProject, $newProjectName, $content);
     $fp = fopen($cpFile, 'w');
@@ -178,6 +178,9 @@ if ((!empty($_POST)) && (isset($_POST['doit']) || isset($_POST['newproject']) ||
             $output = $modx->runSnippet('LexiconHelper');
             break;
         case 'build':
+            if ($object) {
+                $modx->currentProjectObject = &$object;
+            }          
             $output = $modx->runSnippet('Build');
             break;
         case 'checkproperties':

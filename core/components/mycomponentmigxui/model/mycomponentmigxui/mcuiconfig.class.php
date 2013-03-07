@@ -6,6 +6,9 @@ class mcuiConfig extends xPDOSimpleObject {
         $paths = array();
         $paths['mycomponentCore'] = $this->xpdo->getOption('mc.core_path', null, $this->xpdo->getOption('core_path') . 'components/mycomponent/');
         $paths['tplPath'] = $paths['mycomponentCore'] . 'elements/chunks/';
+        
+        $paths['myTplPath'] = dirname(dirname(dirname(__file__))).'/elements/chunks/';
+        
         $this->set('paths', $paths);
         return $paths;
     }
@@ -76,7 +79,7 @@ class mcuiConfig extends xPDOSimpleObject {
         $helpers = new Helpers($this->xpdo, $props);
         $helpers->init();
         $newTpl = $helpers->getTpl('example.config.php');
-
+        //$paths['myTplPath'];
 
         if (empty($newTpl)) {
             $message = 'Could not find example.config.php';
