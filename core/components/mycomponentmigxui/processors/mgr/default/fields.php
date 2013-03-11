@@ -53,7 +53,11 @@ if (empty($scriptProperties['object_id']) || $scriptProperties['object_id'] == '
     }
     if ($object = $modx->getObject($classname, $c)){
         $object_id = $object->get('id');
-        //$object->loadConfigArray();
+        if ($object->get('updates') == 0){
+            //on first time load default values from array
+            $object->loadConfigArray();
+        }
+        
     }
 }
 

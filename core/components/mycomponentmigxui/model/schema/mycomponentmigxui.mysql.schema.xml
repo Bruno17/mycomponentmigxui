@@ -10,6 +10,15 @@
     <field key="gitHubUsername" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
     <field key="gitHubRepository" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
     <field key="primaryLanguage" dbtype="varchar" precision="2" phptype="string" null="false" default="" />
+    
+    <field key="author" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+    <field key="email" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+    <field key="authorUrl" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+    <field key="authorSiteName" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+    <field key="packageDocumentationUrl" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+    <field key="copyright" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+    
+    
     <field key="allStatic" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
     <field key="hasAssets" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
     <field key="minifyJS" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
@@ -46,6 +55,7 @@
 	<field key="createdon" dbtype="datetime" phptype="datetime" null="false" />
 	<field key="editedby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
 	<field key="editedon" dbtype="datetime" phptype="datetime" null="false" />
+    <field key="updates" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
 
 	</object>
 

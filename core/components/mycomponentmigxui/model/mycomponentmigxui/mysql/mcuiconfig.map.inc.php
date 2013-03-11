@@ -14,6 +14,12 @@ $xpdo_meta_map['mcuiConfig']= array (
     'gitHubUsername' => '',
     'gitHubRepository' => '',
     'primaryLanguage' => '',
+    'author' => '',
+    'email' => '',
+    'authorUrl' => '',
+    'authorSiteName' => '',
+    'packageDocumentationUrl' => '',
+    'copyright' => '',
     'allStatic' => 0,
     'hasAssets' => 0,
     'minifyJS' => 0,
@@ -48,6 +54,7 @@ $xpdo_meta_map['mcuiConfig']= array (
     'createdon' => NULL,
     'editedby' => 0,
     'editedon' => NULL,
+    'updates' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -111,6 +118,54 @@ $xpdo_meta_map['mcuiConfig']= array (
     array (
       'dbtype' => 'varchar',
       'precision' => '2',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'author' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '100',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'email' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '100',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'authorUrl' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '100',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'authorSiteName' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '100',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'packageDocumentationUrl' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '100',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'copyright' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '100',
       'phptype' => 'string',
       'null' => false,
       'default' => '',
@@ -371,6 +426,14 @@ $xpdo_meta_map['mcuiConfig']= array (
       'dbtype' => 'datetime',
       'phptype' => 'datetime',
       'null' => false,
+    ),
+    'updates' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
     ),
   ),
 );

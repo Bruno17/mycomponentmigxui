@@ -193,6 +193,12 @@ if ((!empty($_POST)) && (isset($_POST['doit']) || isset($_POST['newproject']) ||
         case 'removeobjectsandfiles':
             $output = $modx->runSnippet('RemoveObjects', array('removeFiles' => true));
             break;
+        case 'exportfiles':
+            if ($object) {
+                $modx->currentProjectObject = &$object;
+                $output = $object->exportFiles();
+            }          
+            break;            
     }
 
 
