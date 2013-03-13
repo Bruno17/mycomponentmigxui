@@ -156,12 +156,12 @@ class mcuiConfig extends xPDOSimpleObject {
                 if (count($subarrays) > 0) {
                     foreach ($subarrays as $subarray) {
                         foreach ($record as $field => $value) {
-                            $fieldparts = explode('.',$field);
-                            if (count($fieldparts)>1 && $fieldparts[0]==$subarray){
+                            $fieldparts = explode('.', $field);
+                            if (count($fieldparts) > 1 && $fieldparts[0] == $subarray) {
                                 $record[$fieldparts[0]][$fieldparts[1]] = $value;
                                 unset($record[$field]);
                             }
-                            
+
                         }
                     }
                 }
@@ -201,36 +201,78 @@ class mcuiConfig extends xPDOSimpleObject {
         }
         return $result;
     }
-    
-    public function exportFiles(){
+
+    public function exportFiles() {
         $paths = $this->initPaths();
 
         $path = $paths['mycomponentCore'] . '_build/config/' . strtolower($this->get('packageName') . '.config.php');
         if (file_exists($path)) {
             $configArray = include $path;
-            $dirPermission = $this->xpdo->getOption('dirPermission',$configArray,0777);
-            $packageNameLower = $this->xpdo->getOption('packageNameLower',$configArray,'');
-            $targetRoot = $this->xpdo->getOption('targetRoot',$configArray,'');
-            $workingDirs = $this->xpdo->getOption('workingDirs',$configArray,array());
-            $assetsWorkingDir = $this->xpdo->getOption('assets',$workingDirs,'');
-            $coreWorkingDir = $this->xpdo->getOption('core',$workingDirs,'');
-            if (!empty($packageNameLower) && !empty($assetsWorkingDir) && !empty($targetRoot)){
-                $assetsTargetDir = $targetRoot.'assets/components/'.$packageNameLower.'/';
-                $this->copyDir($assetsWorkingDir,$assetsTargetDir,$dirPermission);
+            $dirPermission = $this->xpdo->getOption('dirPermission', $configArray, 0777);
+            $packageNameLower = $this->xpdo->getOption('packageNameLower', $configArray, '');
+            $targetRoot = $this->xpdo->getOption('targetRoot', $configArray, '');
+            $workingDirs = $this->xpdo->getOption('workingDirs', $configArray, array());
+            $assetsWorkingDir = $this->xpdo->getOption('assets', $workingDirs, '');
+            $coreWorkingDir = $this->xpdo->getOption('core', $workingDirs, '');
+            if (!empty($packageNameLower) && !empty($assetsWorkingDir) && !empty($targetRoot)) {
+                $assetsTargetDir = $targetRoot . 'assets/components/' . $packageNameLower . '/';
+                $this->copyDir($assetsWorkingDir, $assetsTargetDir, $dirPermission);
             }
-            if (!empty($packageNameLower) && !empty($coreWorkingDir) && !empty($targetRoot)){
-                $coreTargetDir = $targetRoot.'core/components/'.$packageNameLower.'/';
-                $this->copyDir($coreWorkingDir,$coreTargetDir,$dirPermission);
-            }            
-            
+            if (!empty($packageNameLower) && !empty($coreWorkingDir) && !empty($targetRoot)) {
+                $coreTargetDir = $targetRoot . 'core/components/' . $packageNameLower . '/';
+                $this->copyDir($coreWorkingDir, $coreTargetDir, $dirPermission);
+            }
+
         }
-     
+
     }
-    
-    public function copyDir($source, $destination,$dirPermission)
-    {
-        $source = rtrim($source,'/');
-        $destination = rtrim($destination,'/');
+
+    public function exportPackages() {
+        $paths = $this->initPaths();
+
+        $path = $paths['mycomponentCore'] . '_build/config/' . strtolower($this->get('packageName') . '.config.php');
+        if (file_exists($path)) {
+            $configArray = include $path;
+            $dirPermission = $this->xpdo->getOption('dirPermission', $configArray, 0777);
+            $packageNameLower = $this->xpdo->getOption('packageNameLower', $configArray, '');
+            $targetRoot = $this->xpdo->getOption('targetRoot', $configArray, '');
+            $subpackages = $this->xpdo->getOption('subpackages', $configArray, '');
+            $sourceDir = $this->xpdo->getOption('core_path') . 'packages/';
+            $targetCore = $targetRoot.'core/';
+            $targetPackages = $targetCore.'packages/';
+
+            if (is_array($subpackages) && !empty($targetRoot)) {
+                $targetDir = $targetRoot . '_build/data/subpackages';
+        
+                if (!is_dir($targetCore)) {
+                    mkdir($targetCore, $dirPermission, true);
+                }
+                if (!is_dir($targetPackages)) {
+                    mkdir($targetPackages, $dirPermission, true);
+                }                                 
+                if (!is_dir($targetDir)) {
+                    mkdir($targetDir, $dirPermission, true);
+                }
+                foreach ($subpackages as $package) {
+                    $filename = $package . '.transport.zip';
+                    $source = $sourceDir . $filename;
+                    $destination = $targetPackages . '/' . $filename;
+                    if (file_exists($source)){
+                    copy($source, $destination);
+                    echo "SOURCE: " . $source . "\nDESTINATION: " . $destination . "<br />";                        
+                    }
+                    else{
+                        echo "SOURCE: " . $source . ' does not exist <br />';    
+                    }
+
+                }
+            }
+        }
+    }
+
+    public function copyDir($source, $destination, $dirPermission) {
+        $source = rtrim($source, '/');
+        $destination = rtrim($destination, '/');
         echo "SOURCE: " . $source . "\nDESTINATION: " . $destination . "<br />";
         if (is_dir($source)) {
             if (!is_dir($destination)) {
@@ -244,7 +286,7 @@ class mcuiConfig extends xPDOSimpleObject {
                     }
 
                     if (is_dir($source . '/' . $file)) {
-                        $this->copyDir($source . '/' . $file, $destination . '/' . $file,$dirPermission);
+                        $this->copyDir($source . '/' . $file, $destination . '/' . $file, $dirPermission);
                     } else {
                         copy($source . '/' . $file, $destination . '/' . $file);
                     }
@@ -256,25 +298,19 @@ class mcuiConfig extends xPDOSimpleObject {
         } else {
             return false;
         }
-    }    
+    }
 
     public function createConfigFile() {
         $newProjectName = $this->get('packageName');
         $newProjectLower = strtolower($newProjectName);
-
         $paths = $this->initPaths();
-
         $props = array();
-
-
         require_once $paths['mycomponentCore'] . 'model/mycomponent/helpers.class.php';
         $props['mycomponentCore'] = $paths['myCore'];
         $helpers = new Helpers($this->xpdo, $props);
         $helpers->init();
         //$helpers->tplPath = $paths['myTplPath'];echo $paths['myTplPath'];
         $newTpl = $helpers->getTpl('migxexample.config.php');
-
-
         if (empty($newTpl)) {
             $this->set('errormessage', 'Could not find migxexample.config.php');
             return false;
@@ -287,7 +323,6 @@ class mcuiConfig extends xPDOSimpleObject {
             return false;
         }
         $configFile = $configDir . $newProjectLower . '.config.php';
-
         if (!file_exists($configFile)) {
             $fp = fopen($configFile, 'w');
             if ($fp) {
@@ -309,7 +344,6 @@ class mcuiConfig extends xPDOSimpleObject {
 
         }
         return true;
-
     }
 
 

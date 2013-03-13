@@ -43,7 +43,9 @@
         <label for="exportobjects"> <input type="radio" name="doit" value="exportobjects" id="exportobjects"/>
             ExportObjects</label><br/><br/>
         <label for="exportfiles"> <input type="radio" name="doit" value="exportfiles" id="exportfiles"/>
-            ExportFiles (assets + core from workingDirs)</label><br/><br/>            
+            ExportFiles (assets + core from workingDirs)</label><br/><br/>  
+        <label for="exportpackages"> <input type="radio" name="doit" value="exportpackages" id="exportpackages"/>
+            ExportPackages </label><br/><br/>                       
         <label for="importobjects"> <input type="radio" name="doit" value="importobjects" id="importobjects"/>
                         ImportObjects</label><br/><br/>
         <label for="lexiconhelper"> <input type="radio" name="doit" value="lexiconhelper" id="lexiconhelper"/>

@@ -50,6 +50,7 @@
     <field key="parents" dbtype="text" phptype="string" null="false" default="" />
     <field key="includeParents" dbtype="text" phptype="string" null="false" default="" />
     <field key="scriptPropertiesAliases" dbtype="text" phptype="string" null="false" default="" />
+    <field key="subpackages" dbtype="text" phptype="string" null="false" default="" />
     
     <field key="createdby" dbtype="int" precision="10" phptype="integer" null="false" default="0" />
 	<field key="createdon" dbtype="datetime" phptype="datetime" null="false" />

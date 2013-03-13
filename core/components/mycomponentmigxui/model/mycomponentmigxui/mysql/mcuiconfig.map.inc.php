@@ -50,6 +50,7 @@ $xpdo_meta_map['mcuiConfig']= array (
     'parents' => '',
     'includeParents' => '',
     'scriptPropertiesAliases' => '',
+    'subpackages' => '',
     'createdby' => 0,
     'createdon' => NULL,
     'editedby' => 0,
@@ -393,6 +394,13 @@ $xpdo_meta_map['mcuiConfig']= array (
       'default' => '',
     ),
     'scriptPropertiesAliases' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'subpackages' => 
     array (
       'dbtype' => 'text',
       'phptype' => 'string',

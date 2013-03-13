@@ -9,7 +9,7 @@ if (is_object($this->modx)) {
     $modx = &$this->xpdo;
 }
 
-$components = array(
+$default = array(
     /* These are used to define the package and set values for placeholders */
     'packageName' => 'Example',
      /* No spaces, no dashes */
@@ -532,9 +532,13 @@ $components = array(
     );
 
 if (is_object($modx->currentProjectObject)) {
-    $components = $modx->currentProjectObject->prepareConfigArray($components);
+    //replace default configurations with UI - configurations 
+    $components = $modx->currentProjectObject->prepareConfigArray($default);
+    print_r($components);
+}
+else{
+    $components = $default;    
 }
 
-print_r($components);
 
 return $components;

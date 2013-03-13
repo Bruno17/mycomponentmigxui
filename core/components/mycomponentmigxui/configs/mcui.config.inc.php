@@ -26,6 +26,15 @@ $mcui_config = '
     ,"process":{
         "type":"arraylist"
     }
+    ,"parents":{
+        "type":"arraylist"
+    }
+    ,"exportResources":{
+        "type":"arraylist"
+    }
+    ,"subpackages":{
+        "type":"arraylist"
+    }            
     ,"install_options":{
         "type":"fromdb_rename"
         ,"renameto":"install.options"
