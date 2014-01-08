@@ -1,0 +1,5 @@
+Changelog for MyComponentMigxUi
+
+MyComponentMigxUi 1.0.0
+---------------------------------
+Initial Version

@@ -425,7 +425,7 @@
           "configs":"",
           "sourceFrom":"config",
           "sources":"",
-          "inputOptionValues":"",
+          "inputOptionValues":"@EVAL return $modx->runSnippet('migxGetPackageFilelist);",
           "default":""
         }
       ]
@@ -434,10 +434,26 @@
   "contextmenus":"remove",
   "actionbuttons":"addItem",
   "columnbuttons":"update||runmycomponent",
-  "filters":"",
+  "filters":[
+    {
+      "MIGX_id":1,
+      "name":"search",
+      "label":"search",
+      "emptytext":"search...",
+      "type":"textbox",
+      "getlistwhere":{
+        "packageName:LIKE":"%[[+search]]%"
+      },
+      "getcomboprocessor":"",
+      "combotextfield":"",
+      "comboidfield":"",
+      "comboparent":""
+    }
+  ],
   "extended":{
     "migx_add":"New Component",
-    "formcaption":"Component",
+    "formcaption":"Component [[+packageName]]",
+    "update_win_title":"MyComponentMigxUI",
     "win_id":"mycomponentmigxui",
     "multiple_formtabs":"",
     "extrahandlers":"",
@@ -513,7 +529,7 @@
   "createdby":0,
   "createdon":"2013-03-06 01:00:00",
   "editedby":1,
-  "editedon":"2013-03-13 08:41:32",
+  "editedon":"2013-03-20 06:58:15",
   "deleted":0,
   "deletedon":"-1-11-30 00:00:00",
   "deletedby":0,

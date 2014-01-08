@@ -198,6 +198,7 @@ if ((!empty($_POST)) && (isset($_POST['doit']) || isset($_POST['newproject']) ||
                 $modx->currentProjectObject = &$object;
                 $output = $object->exportFiles();
             }
+            break;
         case 'exportpackages':
             if ($object) {
                 $modx->currentProjectObject = &$object;

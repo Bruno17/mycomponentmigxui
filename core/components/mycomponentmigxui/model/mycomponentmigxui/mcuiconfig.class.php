@@ -256,7 +256,7 @@ class mcuiConfig extends xPDOSimpleObject {
                 foreach ($subpackages as $package) {
                     $filename = $package . '.transport.zip';
                     $source = $sourceDir . $filename;
-                    $destination = $targetPackages . '/' . $filename;
+                    $destination = $targetPackages . $filename;
                     if (file_exists($source)){
                     copy($source, $destination);
                     echo "SOURCE: " . $source . "\nDESTINATION: " . $destination . "<br />";                        
